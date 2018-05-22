@@ -1,0 +1,30 @@
+
+  <div class="container">
+    <h2 class="text-center">Flight Search Engine</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <form>
+            <div class="form-group">
+                <button class="btn btn-info" #oneway (click)='oneWay()'>One Way</button>
+                <button class="btn btn-info margin-left" #return (click)='onReturn()'>Return</button>
+            </div> 
+            <div class="form-group">
+              <input type="text" [(ngModel)]="source" name="source" class="form-control" placeholder="Enter Origin City">
+             </div> 
+            <div class="form-group">
+              <input type="text" [(ngModel)]="destination" name="destination" class="form-control" placeholder="Enter Destination City">
+            </div> 
+            <div class="form-group">
+              <input type="text" bsDatepicker [(ngModel)]="deptdate" name="deptdate" class="form-control" placeholder="Departure date">
+            </div> 
+            <div *ngIf='returnVal' class="form-group">
+              <input type="text" bsDatepicker [(ngModel)]="retdate" name="retdate" class="form-control" placeholder="Return date">
+            </div> 
+              
+        </form>
+      </div>
+    </div>
+</div>
+
+
+

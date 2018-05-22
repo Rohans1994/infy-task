@@ -1,0 +1,9 @@
+nav {
+    font-size: 20px;
+}
+
+.navbar-brand{
+    position: absolute;
+    left: 10%;
+    transform: translatex(-50%);
+}

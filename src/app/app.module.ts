@@ -1,14 +1,28 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 
 import { AppComponent } from './app.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { BookingComponent } from './components/booking/booking.component';
+
+const appRoutes: Routes =  [
+  {path:'', component: BookingComponent}
+]
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent,
+    BookingComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    BsDatepickerModule.forRoot(),
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [],
   bootstrap: [AppComponent]
