@@ -3,7 +3,9 @@ import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
+import {FlashMessagesModule} from 'angular2-flash-messages';
 
+import {ValidateService} from './services/validate.service';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BookingComponent } from './components/booking/booking.component';
@@ -23,8 +25,9 @@ const appRoutes: Routes =  [
     FormsModule,
     BsDatepickerModule.forRoot(),
     RouterModule.forRoot(appRoutes),
+    FlashMessagesModule.forRoot()
   ],
-  providers: [],
+  providers: [ValidateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
