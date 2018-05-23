@@ -35,3 +35,8 @@ div #flightDetails{
     margin-bottom: 10px;
     padding: 15px;
 }
+
+#flightImg{
+    width: 100px;
+    height: 100px;
+}

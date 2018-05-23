@@ -6,7 +6,7 @@
       <div class="col-md-4" id="searchBox">
         <form (submit)="onRegisterSubmit()">
             <div class="form-group">
-                <button class="btn btn-info" type="button" #oneway (click)='oneWay()'>One Way</button>
+                <button class="btn btn-info" type="button" #oneway (click)='onOneWay()'>One Way</button>
                 <button class="btn btn-info margin-left" type="button" #return (click)='onReturn()'>Return</button>
             </div> 
             <div class="form-group">
@@ -48,10 +48,11 @@
            
         </form>
       </div>
-        <div class="col-md-8" id="result"  >
-          <div class="row">
-              <div class="container" id="route" >
-                <span>{{origin}}  {{destination}}</span>
+
+      <div class="col-md-8" id="result" *ngIf="Result">
+          <div class="row"  >
+              <div class="container" id="route"  >
+                <h4>Flight details from {{origin}} > {{destination}}</h4>
               </div>  
           </div>
           <ng-container *ngFor= "let data of selectedFlight; let i=index">
@@ -71,6 +72,30 @@
                     <span>Arrive: {{data.arrival}}</span>
                 </div>
               </div>
+              <div class="col-md-4" >
+                <h5>Rs {{data.price}}</h5>
+                <div>
+                  <span>{{data.flightNo}}</span>
+                </div>
+                <div>
+                    <span>{{data.origin}}</span> > <span>{{data.destination}}</span>
+                </div>
+                <div>
+                    <span>Depart: {{data.departure}}</span>
+                </div>
+                <div>
+                    <span>Arrive: {{data.arrival}}</span>
+                </div>
+              </div>
+              <div class="col-md-4" >
+                <div>
+                    <img id="flightImg" src="https://www.ninimovers.com/wp-content/uploads/2015/02/fa-fa-plane.png">
+                </div>
+                <div>
+                    <button class="btn btn-info" type="button" #bookTicket>Book Ticket</button>
+                </div>
+                
+              </div> 
             </div>  
           </ng-container>  
             

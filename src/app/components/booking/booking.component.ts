@@ -19,6 +19,7 @@ export class BookingComponent implements OnInit {
   retdate:Date;
   Result: Boolean=false;
   selectedFlight=[];
+  returnFlight=[];
   query;
   
   constructor(
@@ -36,7 +37,7 @@ export class BookingComponent implements OnInit {
   onReturn(){
     this.returnVal=true;
   }
-  oneWay(){
+  onOneWay(){
     this.returnVal=false;
   }
   sliderChange(value){
@@ -64,7 +65,7 @@ export class BookingComponent implements OnInit {
 
     if(!this.validateService.validateSearch(this.query)){
       this.flashMessage.show('Please fill in all fields', {cssClass: 'alert-danger', timeout: 3000});
-      
+      return false;
     }     
 
     this.getSelectedFlights();
@@ -74,7 +75,55 @@ export class BookingComponent implements OnInit {
   getSelectedFlights(){
     this.validateService.selectFlight(this.query);
     this.selectedFlight=this.validateService.selectedFlight;
-    console.log('selected flight');
+    this.returnFlight=this.validateService.returnFlight;
+    console.log('In booking');
     console.log(this.selectedFlight);
+    console.log(this.returnFlight);
+
+    if(!this.returnVal){
+      this.oneWay(this.selectedFlight);
+    }
+    else{
+      this.twoWay(this.returnFlight);
+    }
+  
+
+   
+    //console.log('counter'+counter+'Result'+ this.Result); 
   }
+
+  oneWay(selectedFlight){
+    var counter:number=0;
+    for(var i=0; i < this.selectedFlight.length;i++){
+      if(this.selectedFlight[i].isChecked==true){
+          counter+=1;
+      }
+    }
+    if(counter>0){
+      this.Result=true;
+    }
+    else{
+      this.Result=false;
+      this.flashMessage.show('No Flights available for the given price range', {cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+  }
+
+  twoWay(returnFlight){
+    var counter:number=0;
+    for(var i=0; i < this.returnFlight.length;i++){
+      if(this.returnFlight[i].isChecked==true){
+          counter+=1;
+      }
+    }
+    if(counter>0){
+      this.Result=true;
+    }
+    else{
+      this.Result=false;
+      this.flashMessage.show('No Flights available for the given price range', {cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+  }
+
 }
