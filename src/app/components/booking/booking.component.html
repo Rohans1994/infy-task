@@ -72,21 +72,23 @@
                     <span>Arrive: {{data.arrival}}</span>
                 </div>
               </div>
-              <div class="col-md-4" >
-                <h5>Rs {{data.price}}</h5>
-                <div>
-                  <span>{{data.flightNo}}</span>
+              <ng-container *ngFor= "let retdata of returnFlight; let i=index">
+                <div class="col-md-4" *ngIf="retResult && retdata.isChecked==true">
+                  <h5>Rs {{retdata.price}}</h5>
+                  <div>
+                    <span>{{retdata.flightNo}}</span>
+                  </div>
+                  <div>
+                      <span>{{retdata.origin}}</span> > <span>{{retdata.destination}}</span>
+                  </div>
+                  <div>
+                      <span>Depart: {{retdata.departure}}</span>
+                  </div>
+                  <div>
+                      <span>Arrive: {{retdata.arrival}}</span>
+                  </div>
                 </div>
-                <div>
-                    <span>{{data.origin}}</span> > <span>{{data.destination}}</span>
-                </div>
-                <div>
-                    <span>Depart: {{data.departure}}</span>
-                </div>
-                <div>
-                    <span>Arrive: {{data.arrival}}</span>
-                </div>
-              </div>
+              </ng-container>
               <div class="col-md-4" >
                 <div>
                     <img id="flightImg" src="https://www.ninimovers.com/wp-content/uploads/2015/02/fa-fa-plane.png">
@@ -96,6 +98,9 @@
                 </div>
                 
               </div> 
+
+             
+
             </div>  
           </ng-container>  
             

@@ -18,9 +18,11 @@ export class BookingComponent implements OnInit {
   deptdate:Date;
   retdate:Date;
   Result: Boolean=false;
+  retResult:Boolean=true;
   selectedFlight=[];
   returnFlight=[];
   query;
+  currDate = new Date();
   
   constructor(
     private validateService: ValidateService,
@@ -62,6 +64,39 @@ export class BookingComponent implements OnInit {
       noofpass:this.noofpass,
       returnVal:this.returnVal
     }
+
+    if(!this.query.returnVal){
+      if(this.currDate.getFullYear() > this.query.deptdate.getFullYear() || this.currDate.getFullYear() < this.query.deptdate.getFullYear() ){
+        this.flashMessage.show('Departure year is incorrect', {cssClass: 'alert-danger', timeout: 3000});
+        return false;
+      }
+      else if(this.currDate.getMonth() > this.query.deptdate.getMonth()){
+        this.flashMessage.show('Departure month is incorrect', {cssClass: 'alert-danger', timeout: 3000});
+        return false;
+      }
+      else if(this.currDate.getDay() > this.query.deptdate.getDay()){
+        this.flashMessage.show('Departure day is incorrect', {cssClass: 'alert-danger', timeout: 3000});
+        return false;
+      }
+    }
+    else{
+      if(this.query.retdate.getFullYear() > this.query.deptdate.getFullYear() || this.query.retdate.getFullYear() < this.query.deptdate.getFullYear()){
+        this.flashMessage.show('Return year is incorrect', {cssClass: 'alert-danger', timeout: 3000});
+        return false;
+      }
+      else if(this.query.retdate.getMonth() < this.query.deptdate.getMonth()){
+        this.flashMessage.show('Return month is incorrect', {cssClass: 'alert-danger', timeout: 3000});
+        return false;
+      }
+      else if((this.query.retdate.getMonth() <= this.query.deptdate.getMonth()) && (this.query.retdate.getDay() < this.query.deptdate.getDay())){
+        this.flashMessage.show('Return day is incorrect', {cssClass: 'alert-danger', timeout: 3000});
+        return false;
+      } 
+    }
+
+    
+     
+    
 
     if(!this.validateService.validateSearch(this.query)){
       this.flashMessage.show('Please fill in all fields', {cssClass: 'alert-danger', timeout: 3000});
