@@ -18,7 +18,7 @@ export class BookingComponent implements OnInit {
   deptdate:Date;
   retdate:Date;
   Result: Boolean=false;
-  retResult:Boolean=true;
+  retResult:Boolean=false;
   selectedFlight=[];
   returnFlight=[];
   query;
@@ -30,31 +30,22 @@ export class BookingComponent implements OnInit {
 
   ) { }
 
-  ngOnInit() {
-    //this.selectedFlight=this.validateService.selectedFlight;
-    //console.log('In Booking');
-    //console.log(this.selectedFlight);
-  }
+  ngOnInit() {  }
 
   onReturn(){
     this.returnVal=true;
   }
+
   onOneWay(){
     this.returnVal=false;
+    this.retResult=false;
   }
+
   sliderChange(value){
     this.price=value;
   }
+  
   onRegisterSubmit(){
-    console.log('submitted');
-    console.log(this.origin);
-    console.log(this.destination);
-    console.log(this.price);
-    console.log(this.noofpass);
-    console.log(this.deptdate);
-    console.log(this.retdate);
-    console.log(this.returnVal);
-
     this.query = {
       origin: this.origin,
       destination: this.destination,
@@ -62,69 +53,41 @@ export class BookingComponent implements OnInit {
       retdate:this.retdate,
       price:this.price,
       noofpass:this.noofpass,
-      returnVal:this.returnVal
+      returnVal:this.returnVal,
+      currDate:this.currDate
     }
-
-    if(!this.query.returnVal){
-      if(this.currDate.getFullYear() > this.query.deptdate.getFullYear() || this.currDate.getFullYear() < this.query.deptdate.getFullYear() ){
-        this.flashMessage.show('Departure year is incorrect', {cssClass: 'alert-danger', timeout: 3000});
-        return false;
-      }
-      else if(this.currDate.getMonth() > this.query.deptdate.getMonth()){
-        this.flashMessage.show('Departure month is incorrect', {cssClass: 'alert-danger', timeout: 3000});
-        return false;
-      }
-      else if(this.currDate.getDay() > this.query.deptdate.getDay()){
-        this.flashMessage.show('Departure day is incorrect', {cssClass: 'alert-danger', timeout: 3000});
-        return false;
-      }
-    }
-    else{
-      if(this.query.retdate.getFullYear() > this.query.deptdate.getFullYear() || this.query.retdate.getFullYear() < this.query.deptdate.getFullYear()){
-        this.flashMessage.show('Return year is incorrect', {cssClass: 'alert-danger', timeout: 3000});
-        return false;
-      }
-      else if(this.query.retdate.getMonth() < this.query.deptdate.getMonth()){
-        this.flashMessage.show('Return month is incorrect', {cssClass: 'alert-danger', timeout: 3000});
-        return false;
-      }
-      else if((this.query.retdate.getMonth() <= this.query.deptdate.getMonth()) && (this.query.retdate.getDay() < this.query.deptdate.getDay())){
-        this.flashMessage.show('Return day is incorrect', {cssClass: 'alert-danger', timeout: 3000});
-        return false;
-      } 
-    }
-
-    
-     
-    
 
     if(!this.validateService.validateSearch(this.query)){
       this.flashMessage.show('Please fill in all fields', {cssClass: 'alert-danger', timeout: 3000});
       return false;
-    }     
+    } 
+
+     if(!this.query.returnVal){
+       if(!this.validateService.validateDeptDate(this.query)){
+        return false;
+       }
+    } 
+     else{
+      if(!this.validateService.validateRetDate(this.query)){
+        return false;
+      }
+    } 
 
     this.getSelectedFlights();
-
   } 
 
   getSelectedFlights(){
     this.validateService.selectFlight(this.query);
     this.selectedFlight=this.validateService.selectedFlight;
     this.returnFlight=this.validateService.returnFlight;
-    console.log('In booking');
-    console.log(this.selectedFlight);
-    console.log(this.returnFlight);
 
     if(!this.returnVal){
       this.oneWay(this.selectedFlight);
     }
     else{
+      this.oneWay(this.selectedFlight);
       this.twoWay(this.returnFlight);
-    }
-  
-
-   
-    //console.log('counter'+counter+'Result'+ this.Result); 
+    }    
   }
 
   oneWay(selectedFlight){
@@ -152,10 +115,10 @@ export class BookingComponent implements OnInit {
       }
     }
     if(counter>0){
-      this.Result=true;
+      this.retResult=true;
     }
     else{
-      this.Result=false;
+      this.retResult=false;
       this.flashMessage.show('No Flights available for the given price range', {cssClass: 'alert-danger', timeout: 3000});
       return false;
     }

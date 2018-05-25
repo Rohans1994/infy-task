@@ -1,123 +1,83 @@
 
   <div class="container">
-    <h1 class="text-center">Flight Search Engine</h1>
-    
-    <div class="row">
-      <div class="col-md-4" id="searchBox">
-        <form (submit)="onRegisterSubmit()">
-            <div class="form-group">
-                <button class="btn btn-info" type="button" #oneway (click)='onOneWay()'>One Way</button>
-                <button class="btn btn-info margin-left" type="button" #return (click)='onReturn()'>Return</button>
-            </div> 
-            <div class="form-group">
-              <input type="text" [(ngModel)]="origin" name="origin" class="form-control" placeholder="Enter Origin City">
-             </div> 
-            <div class="form-group">
-              <input type="text" [(ngModel)]="destination" name="destination" class="form-control" placeholder="Enter Destination City">
-            </div> 
-            <div class="form-group">
-              <input type="text" bsDatepicker [(ngModel)]="deptdate" name="deptdate" class="form-control" placeholder="Departure date">
-            </div> 
-            <div *ngIf='returnVal' class="form-group">
-              <input type="text" bsDatepicker [(ngModel)]="retdate" name="retdate" class="form-control" placeholder="Return date">
-            </div> 
-            <div class="form-group">
-                <input type="number"  [(ngModel)]="noofpass" name="noofpass" class="form-control" 
-                placeholder="Number of passenger" min="1" max="10">
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary" >Search</button>
-            </div> 
-            <div class="container" id="refine">
-              <h5>Refine Flight Search</h5>
-              <div class="form-group" id="slider">
-                  <span>0</span><input type="range" min="0" max="10000" step="100" #slider 
-                  (change)="sliderChange(slider.value)" ><span>10000</span>
-              </div>
-              <div>Price: {{price}}</div>
-            </div>
-                
-                  <!-- <div data-role="rangeslider">
-                    <label for="price-min">Price:</label>
-                    <input type="range" name="price-min" id="price-min" value="200" min="0" max="1000">
-                    <label for="price-max">Price:</label>
-                    <input type="range" name="price-max" id="price-max" value="800" min="0" max="1000">
-                  </div> -->
-                    
-                  
-           
-        </form>
-      </div>
-
-      <div class="col-md-8" id="result" *ngIf="Result">
-          <div class="row"  >
-              <div class="container" id="route"  >
-                <h4>Flight details from {{origin}} > {{destination}}</h4>
-              </div>  
-          </div>
-          <ng-container *ngFor= "let data of selectedFlight; let i=index">
-            <div *ngIf="data.isChecked==true" class="row" id="flightDetails">
-              <div class="col-md-4" >
-                <h5>Rs {{data.price}}</h5>
-                <div>
-                  <span>{{data.flightNo}}</span>
-                </div>
-                <div>
-                    <span>{{data.origin}}</span> > <span>{{data.destination}}</span>
-                </div>
-                <div>
-                    <span>Depart: {{data.departure}}</span>
-                </div>
-                <div>
-                    <span>Arrive: {{data.arrival}}</span>
-                </div>
-              </div>
-              <ng-container *ngFor= "let retdata of returnFlight; let i=index">
-                <div class="col-md-4" *ngIf="retResult && retdata.isChecked==true">
-                  <h5>Rs {{retdata.price}}</h5>
-                  <div>
-                    <span>{{retdata.flightNo}}</span>
-                  </div>
-                  <div>
-                      <span>{{retdata.origin}}</span> > <span>{{retdata.destination}}</span>
-                  </div>
-                  <div>
-                      <span>Depart: {{retdata.departure}}</span>
-                  </div>
-                  <div>
-                      <span>Arrive: {{retdata.arrival}}</span>
-                  </div>
-                </div>
-              </ng-container>
-              <div class="col-md-4" >
-                <div>
-                    <img id="flightImg" src="https://www.ninimovers.com/wp-content/uploads/2015/02/fa-fa-plane.png">
-                </div>
-                <div>
-                    <button class="btn btn-info" type="button" #bookTicket>Book Ticket</button>
-                </div>
-                
+      <h1 class="text-center">Flight Search Engine</h1>
+      
+      <div class="row">
+        <div class="col-md-4" id="searchBox">
+          <form (submit)="onRegisterSubmit()">
+              <div class="form-group">
+                  <button class="btn btn-info" type="button" #oneway (click)='onOneWay()'>One Way</button>
+                  <button class="btn btn-info margin-left" type="button" #return (click)='onReturn()'>Return</button>
               </div> 
-
-             
-
-            </div>  
-          </ng-container>  
-            
+              <div class="form-group">
+                <input type="text" [(ngModel)]="origin" name="origin" class="form-control" placeholder="Enter Origin City">
+               </div> 
+              <div class="form-group">
+                <input type="text" [(ngModel)]="destination" name="destination" class="form-control" placeholder="Enter Destination City">
+              </div> 
+              <div class="form-group">
+                <input type="text" bsDatepicker [(ngModel)]="deptdate" name="deptdate" class="form-control" placeholder="Departure date">
+              </div> 
+              <div *ngIf='returnVal' class="form-group">
+                <input type="text" bsDatepicker [(ngModel)]="retdate" name="retdate" class="form-control" placeholder="Return date">
+              </div> 
+              <div class="form-group">
+                  <input type="number"  [(ngModel)]="noofpass" name="noofpass" class="form-control" 
+                  placeholder="Number of passenger" min="1" max="10">
+              </div>
+              <div class="form-group">
+                  <button type="submit" class="btn btn-primary" >Search</button>
+              </div> 
+              <div class="container" id="refine">
+                <h5>Refine Flight Search</h5>
+                <div class="form-group" id="slider">
+                    <span>0</span><input type="range" min="0" max="10000" step="100" #slider 
+                    (change)="sliderChange(slider.value)" ><span>10000</span>
+                </div>
+                <div>Price: {{price}}</div>
+              </div>
+          </form>
         </div>
   
-
-
-    </div>
-</div>
-<script>
-  var slider = new Slider('#ex2', {});
-</script>
-
-
+        <div class="col-md-4" id="result" *ngIf="Result">     
+          <div class="col-md-12" id="route" >
+              <h4>Flight details from {{origin}} > {{destination}}</h4>
+          </div>
+          <ng-container   *ngFor="let data of selectedFlight" >
+              <div class="col-md-12" *ngIf="data.isChecked==true" id="flightDetails">
+                <h5>Rs{{data.price}}</h5><br>
+                <span>{{data.flightNo}}</span><br>
+                <span>From: {{data.origin}} to {{data.destination}}</span><br>
+                <span>Depart: {{data.departure}}  </span> <span> Arrival: {{data.arrival}}</span><br>
+                
+                <button class="btn btn-info" type="button" #bookTicket>Book Ticket</button>
+              </div>
+          </ng-container>
+        </div>
+        <div class="col-md-4" id="result" *ngIf="retResult">
+            <div class="col-md-12" id="route" >
+                <h4>Return Flight details from {{destination}} > {{origin}}</h4>
+            </div>
+            <ng-container   *ngFor="let data of returnFlight" >
+                <div class="col-md-12" *ngIf="data.isChecked==true" id="flightDetails">
+                  <h5>Rs{{data.price}}</h5><br>
+                  <span>{{data.flightNo}}</span><br>
+                  <span>From: {{data.origin}} to {{data.destination}}</span><br>
+                  <span>Depart: {{data.departure}}  </span> <span> Arrival: {{data.arrival}}</span><br>
+                  
+                  <button class="btn btn-info" type="button" #bookTicket>Book Ticket</button>
+                </div>
+            </ng-container>
+        </div>
+      </div>
+  </div>
   
- 
   
-
-
-
+  
+    
+   
+    
+  
+  
+  
+  

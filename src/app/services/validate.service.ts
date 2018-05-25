@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { QUERY_READ_CONTAINER_REF } from '@angular/core/src/render3';
+import {FlashMessagesService} from 'angular2-flash-messages';
 
 @Injectable({
   providedIn: 'root'
@@ -7,55 +8,50 @@ import { QUERY_READ_CONTAINER_REF } from '@angular/core/src/render3';
 export class ValidateService {
 
   data = [
-    {flightNo: "AI 201",origin:"PUN",destination: "DEL",departure:10.00,arrival:12.00,price:9500, isChecked:false},
-    {flightNo: "AI 202",origin:"DEL",destination: "PUN",departure:13.00,arrival:15.00,price:19500, isChecked:false},
-    {flightNo: "AI 203",origin:"PUN",destination: "DEL",departure:11.00,arrival:13.00,price:8500, isChecked:false},
-    {flightNo: "AI 403",origin:"PUN",destination: "DEL",departure:11.00,arrival:13.00,price:8500, isChecked:false},
-    
-    {flightNo: "AI 204",origin:"PUN",destination: "DEL",departure:13.00,arrival:15.00,price:6500, isChecked:false},
-    {flightNo: "AI 205",origin:"DEL",destination: "PUN",departure:6.00,arrival:8.00,price:9500, isChecked:false},
-    {flightNo: "AI 206",origin:"DEL",destination: "PUN",departure:17.00,arrival:19.00,price:10500, isChecked:false},  
-    {flightNo: "AI 404",origin:"DEL",destination: "PUN",departure:17.00,arrival:19.00,price:1500, isChecked:false},
-    {flightNo: "AI 207",origin:"MUM",destination: "HYD",departure:8.00,arrival:10.00,price:2500, isChecked:false},
-    {flightNo: "AI 208",origin:"MUM",destination: "HYD",departure:21.00,arrival:23.00,price:500, isChecked:false},
-    {flightNo: "AI 209",origin:"HYD",destination: "MUM",departure:7.00,arrival:9.00,price:1500, isChecked:false},
-    {flightNo: "AI 301",origin:"HYD",destination: "DEL",departure:10.00,arrival:12.00,price:1900, isChecked:false},
-    {flightNo: "AI 302",origin:"BAN",destination: "CHE",departure:14.00,arrival:15.00,price:2000, isChecked:false},
-    {flightNo: "AI 303",origin:"BAN",destination: "MUM",departure:10.00,arrival:12.00,price:3500, isChecked:false},
-    {flightNo: "AI 304",origin:"HYD",destination: "BAN",departure:10.00,arrival:12.00,price:7500, isChecked:false},
-    {flightNo: "AI 305",origin:"CHE",destination: "HYD",departure:10.00,arrival:12.00,price:8500, isChecked:false},
+    {flightNo: "AI 201",origin:"PUN",destination: "DEL",departure:"10.00 AM",arrival:"12.00 PM",price:9500, isChecked:false},
+    {flightNo: "AI 202",origin:"DEL",destination: "PUN",departure:"11.00 AM",arrival:"13.00 PM",price:19500, isChecked:false},
+    {flightNo: "AI 203",origin:"PUN",destination: "DEL",departure:"14.00 PM",arrival:"17.00 PM",price:8500, isChecked:false},
+    {flightNo: "AI 403",origin:"PUN",destination: "DEL",departure:"08.00 AM",arrival:"10.00 AM",price:8500, isChecked:false},    
+    {flightNo: "AI 204",origin:"PUN",destination: "DEL",departure:"09.00 AM",arrival:"11.00 AM",price:6500, isChecked:false},
+    {flightNo: "AI 205",origin:"DEL",destination: "PUN",departure:"10.00 AM",arrival:"12.00 PM",price:9500, isChecked:false},
+    {flightNo: "AI 206",origin:"DEL",destination: "PUN",departure:"16.00 PM",arrival:"20.00 PM",price:10500, isChecked:false},  
+    {flightNo: "AI 404",origin:"DEL",destination: "PUN",departure:"18.00 PM",arrival:"22.00 PM",price:1500, isChecked:false},
+    {flightNo: "AI 207",origin:"MUM",destination: "HYD",departure:"10.00 AM",arrival:"13.00 PM",price:2500, isChecked:false},
+    {flightNo: "AI 208",origin:"MUM",destination: "HYD",departure:"10.00 AM",arrival:"12.00 PM",price:500, isChecked:false},
+    {flightNo: "AI 209",origin:"HYD",destination: "MUM",departure:"10.00 AM",arrival:"13.00 PM",price:1500, isChecked:false},
+    {flightNo: "AI 301",origin:"HYD",destination: "DEL",departure:"10.00 AM",arrival:"14.00 PM",price:1900, isChecked:false},
+    {flightNo: "AI 302",origin:"BAN",destination: "CHE",departure:"10.00 AM",arrival:"16.00 PM",price:2000, isChecked:false},
+    {flightNo: "AI 303",origin:"BAN",destination: "MUM",departure:"10.00 AM",arrival:"15.00 PM",price:3500, isChecked:false},
+    {flightNo: "AI 304",origin:"HYD",destination: "BAN",departure:"10.00 AM",arrival:"11.00 AM",price:7500, isChecked:false},
+    {flightNo: "AI 305",origin:"CHE",destination: "HYD",departure:"10.00 AM",arrival:"11.00 AM",price:8500, isChecked:false},
   ];
 
   dataReturn = [
-    {flightNo: "AI 201",origin:"PUN",destination: "DEL",departure:10.00,arrival:12.00,price:9500, isChecked:false},
-    {flightNo: "AI 202",origin:"DEL",destination: "PUN",departure:13.00,arrival:15.00,price:19500, isChecked:false},
-    {flightNo: "AI 203",origin:"PUN",destination: "DEL",departure:11.00,arrival:13.00,price:8500, isChecked:false},
-    {flightNo: "AI 403",origin:"PUN",destination: "DEL",departure:11.00,arrival:13.00,price:8500, isChecked:false},
-    {flightNo: "AI 204",origin:"PUN",destination: "DEL",departure:13.00,arrival:15.00,price:6500, isChecked:false},
-    {flightNo: "AI 205",origin:"DEL",destination: "PUN",departure:6.00,arrival:8.00,price:9500, isChecked:false},
-    {flightNo: "AI 206",origin:"DEL",destination: "PUN",departure:17.00,arrival:19.00,price:1500, isChecked:false}, 
-    {flightNo: "AI 404",origin:"DEL",destination: "PUN",departure:17.00,arrival:19.00,price:1500, isChecked:false}, 
-    {flightNo: "AI 207",origin:"MUM",destination: "HYD",departure:8.00,arrival:10.00,price:2500, isChecked:false},
-    {flightNo: "AI 208",origin:"MUM",destination: "HYD",departure:21.00,arrival:23.00,price:500, isChecked:false},
-    {flightNo: "AI 209",origin:"HYD",destination: "MUM",departure:7.00,arrival:9.00,price:1500, isChecked:false},
-    {flightNo: "AI 301",origin:"HYD",destination: "DEL",departure:10.00,arrival:12.00,price:1900, isChecked:false},
-    {flightNo: "AI 302",origin:"BAN",destination: "CHE",departure:14.00,arrival:15.00,price:2000, isChecked:false},
-    {flightNo: "AI 303",origin:"BAN",destination: "MUM",departure:10.00,arrival:12.00,price:3500, isChecked:false},
-    {flightNo: "AI 304",origin:"HYD",destination: "BAN",departure:10.00,arrival:12.00,price:7500, isChecked:false},
-    {flightNo: "AI 305",origin:"CHE",destination: "HYD",departure:10.00,arrival:12.00,price:8500, isChecked:false},
+    {flightNo: "AI 201",origin:"PUN",destination: "DEL",departure:"10.00 AM",arrival:"12.00 PM",price:9500, isChecked:false},
+    {flightNo: "AI 202",origin:"DEL",destination: "PUN",departure:"11.00 AM",arrival:"13.00 PM",price:19500, isChecked:false},
+    {flightNo: "AI 203",origin:"PUN",destination: "DEL",departure:"14.00 PM",arrival:"17.00 PM",price:8500, isChecked:false},
+    {flightNo: "AI 403",origin:"PUN",destination: "DEL",departure:"08.00 AM",arrival:"10.00 AM",price:8500, isChecked:false},    
+    {flightNo: "AI 204",origin:"PUN",destination: "DEL",departure:"09.00 AM",arrival:"11.00 AM",price:6500, isChecked:false},
+    {flightNo: "AI 205",origin:"DEL",destination: "PUN",departure:"10.00 AM",arrival:"12.00 PM",price:9500, isChecked:false},
+    {flightNo: "AI 206",origin:"DEL",destination: "PUN",departure:"16.00 PM",arrival:"20.00 PM",price:10500, isChecked:false},  
+    {flightNo: "AI 404",origin:"DEL",destination: "PUN",departure:"18.00 PM",arrival:"22.00 PM",price:1500, isChecked:false},
+    {flightNo: "AI 207",origin:"MUM",destination: "HYD",departure:"10.00 AM",arrival:"13.00 PM",price:2500, isChecked:false},
+    {flightNo: "AI 208",origin:"MUM",destination: "HYD",departure:"10.00 AM",arrival:"12.00 PM",price:500, isChecked:false},
+    {flightNo: "AI 209",origin:"HYD",destination: "MUM",departure:"10.00 AM",arrival:"13.00 PM",price:1500, isChecked:false},
+    {flightNo: "AI 301",origin:"HYD",destination: "DEL",departure:"10.00 AM",arrival:"14.00 PM",price:1900, isChecked:false},
+    {flightNo: "AI 302",origin:"BAN",destination: "CHE",departure:"10.00 AM",arrival:"16.00 PM",price:2000, isChecked:false},
+    {flightNo: "AI 303",origin:"BAN",destination: "MUM",departure:"10.00 AM",arrival:"15.00 PM",price:3500, isChecked:false},
+    {flightNo: "AI 304",origin:"HYD",destination: "BAN",departure:"10.00 AM",arrival:"11.00 AM",price:7500, isChecked:false},
+    {flightNo: "AI 305",origin:"CHE",destination: "HYD",departure:"10.00 AM",arrival:"11.00 AM",price:8500, isChecked:false},
   ];
 
   selectedFlight=[];
   returnFlight=[];
 
 
-  constructor() {
-    for(var i=0; i<this.data.length;i++){
-      this.selectedFlight[i]=this.data[i];
-      this.returnFlight[i]=this.dataReturn[i];
-    }
-    console.log('In Constructor');
-   }
+  constructor(
+    private flashMessage:FlashMessagesService ) 
+    {   }
 
 
   validateSearch(query){
@@ -89,13 +85,14 @@ export class ValidateService {
       this.twoWay(query);
     }
     else{
-      console.log('in one way');    
-      //console.log(query.returnVal);
       this.oneWay(query);
     }    
   }
 
   oneWay(query){
+    for(var i=0; i<this.data.length;i++){
+      this.selectedFlight[i]=this.data[i];
+    }
     for(var i=0; i<this.selectedFlight.length;i++){
       if(this.selectedFlight[i].origin==query.origin && this.selectedFlight[i].destination==query.destination &&
           this.selectedFlight[i].price<=query.price ){
@@ -108,6 +105,10 @@ export class ValidateService {
   }
 
   twoWay(query){
+    for(var i=0; i<this.data.length;i++){
+      this.selectedFlight[i]=this.data[i];
+      this.returnFlight[i]=this.dataReturn[i];
+    }
     this.oneWay(query);
     for(var i=0; i<this.returnFlight.length;i++){
       if(this.returnFlight[i].origin==query.destination && this.returnFlight[i].destination==query.origin &&
@@ -118,16 +119,38 @@ export class ValidateService {
         this.returnFlight[i].isChecked=false;
       }
     }
-    console.log('data');
-    console.log(this.data);
-
-    console.log('select flight');
-    console.log(this.selectedFlight)
-
-    console.log('Return flight');
-    console.log(this.returnFlight)
-
   }
 
+  validateDeptDate(query){
+    if(query.currDate.getFullYear() > query.deptdate.getFullYear() || query.currDate.getFullYear() < query.deptdate.getFullYear() ){
+      this.flashMessage.show('Departure year is incorrect', {cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+    else if(query.currDate.getMonth() > query.deptdate.getMonth()){
+      this.flashMessage.show('Departure month is incorrect', {cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+    else if(query.currDate.getUTCDate() > query.deptdate.getUTCDate()){
+      this.flashMessage.show('Departure day is incorrect', {cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+    return true;
+  }
+
+  validateRetDate(query){
+    if(query.retdate.getFullYear() > query.deptdate.getFullYear() || query.retdate.getFullYear() < query.deptdate.getFullYear()){
+      this.flashMessage.show('Return year is incorrect', {cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+    else if(query.retdate.getMonth() < query.deptdate.getMonth()){
+      this.flashMessage.show('Return month is incorrect', {cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+    else if(query.retdate.getUTCDate() < query.deptdate.getUTCDate()){
+      this.flashMessage.show('Return day is incorrect', {cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    } 
+    return true;
+  }
 
 }

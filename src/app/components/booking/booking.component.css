@@ -16,6 +16,7 @@ div #searchBox{
 }
 
 div #result{
+    /* border-left: solid black 1px; */
     border-right: solid black 1px;
     border-top: solid black 1px;
     border-bottom: solid black 1px;
@@ -23,7 +24,7 @@ div #result{
 }
 
 div #route{
-    border-bottom: solid black 1px;
+    /* border-bottom: solid black 1px; */
     padding: 15px;
 }
 
