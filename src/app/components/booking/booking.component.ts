@@ -57,18 +57,19 @@ export class BookingComponent implements OnInit {
       currDate:this.currDate
     }
 
+
     if(!this.validateService.validateSearch(this.query)){
-      this.flashMessage.show('Please fill in all fields', {cssClass: 'alert-danger', timeout: 3000});
+      this.flashMessage.show('Please fill in all fields', {cssClass: 'alert-danger', timeout: 3000});   // Validate all fields of form
       return false;
     } 
 
      if(!this.query.returnVal){
-       if(!this.validateService.validateDeptDate(this.query)){
+       if(!this.validateService.validateDeptDate(this.query)){    // Validate the Departure date
         return false;
        }
     } 
      else{
-      if(!this.validateService.validateRetDate(this.query)){
+      if(!this.validateService.validateRetDate(this.query)){      // Validate the Return date
         return false;
       }
     } 
@@ -80,7 +81,7 @@ export class BookingComponent implements OnInit {
     this.validateService.selectFlight(this.query);
     this.selectedFlight=this.validateService.selectedFlight;
     this.returnFlight=this.validateService.returnFlight;
-
+                                                                        // Get the details of flights
     if(!this.returnVal){
       this.oneWay(this.selectedFlight);
     }
@@ -92,7 +93,7 @@ export class BookingComponent implements OnInit {
 
   oneWay(selectedFlight){
     var counter:number=0;
-    for(var i=0; i < this.selectedFlight.length;i++){
+    for(var i=0; i < this.selectedFlight.length;i++){         //  Get oneWay flights details
       if(this.selectedFlight[i].isChecked==true){
           counter+=1;
       }
@@ -110,7 +111,7 @@ export class BookingComponent implements OnInit {
   twoWay(returnFlight){
     var counter:number=0;
     for(var i=0; i < this.returnFlight.length;i++){
-      if(this.returnFlight[i].isChecked==true){
+      if(this.returnFlight[i].isChecked==true){             //  Get twoWay flights details
           counter+=1;
       }
     }

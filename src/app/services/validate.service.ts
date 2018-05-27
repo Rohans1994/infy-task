@@ -78,11 +78,11 @@ export class ValidateService {
     }
   }
 
-  selectFlight(query){
+ selectFlight(query){
     
 
     if(query.returnVal){
-      this.twoWay(query);
+      this.twoWay(query);                                           // Get the details of flights
     }
     else{
       this.oneWay(query);
@@ -91,7 +91,7 @@ export class ValidateService {
 
   oneWay(query){
     for(var i=0; i<this.data.length;i++){
-      this.selectedFlight[i]=this.data[i];
+      this.selectedFlight[i]=this.data[i];                        //  Get oneWay flights details
     }
     for(var i=0; i<this.selectedFlight.length;i++){
       if(this.selectedFlight[i].origin==query.origin && this.selectedFlight[i].destination==query.destination &&
@@ -109,7 +109,7 @@ export class ValidateService {
       this.selectedFlight[i]=this.data[i];
       this.returnFlight[i]=this.dataReturn[i];
     }
-    this.oneWay(query);
+    this.oneWay(query);                                                     //  Get twoWay flights details
     for(var i=0; i<this.returnFlight.length;i++){
       if(this.returnFlight[i].origin==query.destination && this.returnFlight[i].destination==query.origin &&
           this.returnFlight[i].price<=query.price ){
@@ -128,7 +128,7 @@ export class ValidateService {
     }
     else if(query.currDate.getMonth() > query.deptdate.getMonth()){
       this.flashMessage.show('Departure month is incorrect', {cssClass: 'alert-danger', timeout: 3000});
-      return false;
+      return false;                                                                                             // Validate the Departure date
     }
     else if(query.currDate.getUTCDate() > query.deptdate.getUTCDate()){
       this.flashMessage.show('Departure day is incorrect', {cssClass: 'alert-danger', timeout: 3000});
@@ -142,11 +142,11 @@ export class ValidateService {
       this.flashMessage.show('Return year is incorrect', {cssClass: 'alert-danger', timeout: 3000});
       return false;
     }
-    else if(query.retdate.getMonth() < query.deptdate.getMonth()){
+    else if(query.retdate.getMonth() < query.deptdate.getMonth()){                                                // Validate the Return date
       this.flashMessage.show('Return month is incorrect', {cssClass: 'alert-danger', timeout: 3000});
       return false;
     }
-    else if(query.retdate.getUTCDate() < query.deptdate.getUTCDate()){
+    else if(query.retdate.getMonth() <= query.deptdate.getMonth() && query.retdate.getUTCDate() < query.deptdate.getUTCDate()){
       this.flashMessage.show('Return day is incorrect', {cssClass: 'alert-danger', timeout: 3000});
       return false;
     } 
